@@ -1,13 +1,3 @@
----
-title: AI Media Watchdog
-emoji: 🕵️‍♂️
-colorFrom: red
-colorTo: blue
-sdk: docker
-app_file: main.py
-pinned: true
----
-
 # 🛡️ AI Media Watchdog — Media Insight API
 
 A production-ready **FastAPI** backend for real-time **sentiment** and **toxicity** analysis across **text**, **files**, and **YouTube videos**. Built for media researchers, educators, and AI enthusiasts.
