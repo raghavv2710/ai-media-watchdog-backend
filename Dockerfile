@@ -1,17 +1,27 @@
 FROM python:3.10-slim
 
+# Set up non-root user
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
+
+# Set Hugging Face cache directory
+ENV TRANSFORMERS_CACHE=/app/cache
+ENV HF_HOME=/app/cache
+ENV HF_HUB_CACHE=/app/cache
+
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY . .
+# Copy files
+COPY --chown=user . .
 
-# Upgrade pip and install dependencies
+# Install dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Expose the port expected by Hugging Face
+# Expose port expected by HF Spaces
 EXPOSE 7860
 
-# Run the FastAPI app using uvicorn
+# Run FastAPI
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
