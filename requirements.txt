@@ -1,0 +1,17 @@
+# All backend dependencies should be listed here.
+transformers
+datasets
+huggingface_hub
+scikit-learn
+pandas
+python-dotenv
+PyPDF2
+python-docx
+youtube-transcript-api
+fastapi
+uvicorn
+pydantic
+requests
+httpx
+pytest
+torch
