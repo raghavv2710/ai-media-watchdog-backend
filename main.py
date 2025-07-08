@@ -8,6 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import shutil, os, uuid, json
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.requests import Request
 
 from predict import classify
 from extract.doc_parser import extract_text_from_pdf, extract_text_from_docx, extract_text_from_txt
@@ -26,6 +29,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+def homepage(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # ✅ Request model
 class TextInput(BaseModel):
